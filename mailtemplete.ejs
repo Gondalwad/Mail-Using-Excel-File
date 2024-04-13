@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a1ffe9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #00f5bc;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .container strong {
+            font-weight: bold;
+            color: #000;
+        }
+        table{
+            border: 2px dotted black;
+        }
+       tr,td{
+        
+            padding: 5px;
+            border: 1px solid black;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>
+            <%=msg%>
+        </h2>
+        <table>
+            <tbody>
+                <% for(key of keys){ %>
+                    <tr>
+                       
+                        <td style="font-weight: bold;"> 
+                            <%=key%>
+                        </td>
+                        <td>
+                            <%=data[key]%>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        <p>Thank you!</p>
+    </div>
+</body>
+
+</html>

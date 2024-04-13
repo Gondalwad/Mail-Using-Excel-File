@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileData</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2; /* Set a background color */
+      }
+
+      .container {
+        max-width: 1200px; /* Set a max-width for better layout control */
+        margin: 0 auto; /* Center the container horizontally */
+        padding: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      th, td {
+        padding: 10px;
+        border: 1px solid #ccc; /* Add borders for table cells */
+        text-align: left; /* Align text to the left */
+      }
+
+      th {
+        background-color: #f0f0f0; /* Add a background color for table headers */
+      }
+
+      .sendAll, .sub {
+        text-align: center; /* Center align the content */
+        margin-bottom: 20px; /* Add some space below the elements */
+      }
+
+      .sendAll button, #savebtn {
+        padding: 10px 20px; /* Add padding to buttons */
+        font-size: 16px;
+        background-color: #007bff; /* Blue button color */
+        color: #fff; /* White text color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Add transition effect */
+      }
+
+      .sendAll button:hover, #savebtn:hover {
+        background-color: #0056b3; /* Darken button color on hover */
+      }
+
+      #subject {
+        padding: 10px;
+        width: 100%; /* Make the input field full width */
+        font-size: 16px;
+        border: 1px solid #ccc; /* Add border for input field */
+        border-radius: 5px;
+        box-sizing: border-box; /* Include padding and border in element's total width */
+      }
+
+      .indSend{
+        border-radius: 3px;
+        width: 60px;
+        outline: none;
+        border: 1px solid blue ;
+        padding: 5px;
+      }
+      .indSend:hover{
+        cursor: pointer;
+        background-color: #f03e16;
+        color: white;
+        
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sendAll">
+            <form action="/sendAll" method="post" >
+                <button value="submit">Send All</button>
+            </form>
+        </div>
+
+        <div class="sub">
+          <h3>Subject</h3>
+          <form action="/saveSubject" method="post">
+            <input type="text" name="subject" id="subject" value="<%=sub%>" placeholder="Enter subject...">
+            
+            <input type="text" name="msg" id="subject" value="<%=msg%>"  placeholder="If you wish to add something extra to mail message">
+            <input type="submit" value="Save Subject" id="savebtn">
+          </form>
+        </div>
+        
+        <div class="tableData">
+            <table>
+                <thead>
+                    <tr>
+                        <% for (key of keys){ %>
+                            <th><%= key %></th>                    
+                        <% } %>
+                        <th>Ops</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(data of jsonData){ %>
+                        <tr>
+                          <% for (key of keys) { %>
+                            <% if (data.hasOwnProperty(key) && data[key] !== null && data[key] !== undefined && data[key] !== '') { %>
+                                <td><%= data[key] %></td>
+                            <% } else { %>
+                                <td></td>
+                            <% } %>
+                        <% } %>
+                        
+                        
+                            <td>
+                                <form action="/<%= data.Email %>" method="get">
+                                    <button class="indSend">Send</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
